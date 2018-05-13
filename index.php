@@ -1,5 +1,6 @@
 <?php
 // показывать или нет выполненные задачи
+date_default_timezone_set('Europe/Moscow');
 $show_complete_tasks = rand(0, 1);
 
 $projects = [
@@ -21,13 +22,13 @@ $tasks_list = [
     ],
     [
     'title' => 'Сделать задание первого раздела',
-    'execution' => '21.04.2018',
+    'execution' => '15.05.2018',
     'project' => 'Учеба',
     'done' => false
     ],
     [
     'title' => 'Встреча с другом',
-    'execution' => '22.04.2018',
+    'execution' => '15.04.2018',
     'project' => 'Входящие',
     'done' => true
     ],
