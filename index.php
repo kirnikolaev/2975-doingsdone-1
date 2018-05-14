@@ -52,7 +52,8 @@ $print_layout = render('layout', [
     'projects' => $projects,
     'tasks_list'=>$tasks_list,
     'title'=>'Дела в порядке',
-    'content'=>$print_main
+    'content'=>$print_main,
+    'username'=>'Имя пользователя'
 ]);
 
 print $print_layout;

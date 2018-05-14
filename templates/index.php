@@ -31,12 +31,12 @@
                                 <td class="task__select <?php if ($val['done'] == true): ?>task--completed <?php endif; ?>">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden" type="checkbox" <?php if ($val['done'] == true): ?>checked<?php endif; ?>>
-                                        <span class="checkbox__text"><?= $val['title'] ?></span>
+                                        <span class="checkbox__text"><?=htmlspecialchars($val['title'])?></span>
                                     </label>
                                 </td>
                             
                                             
-                                <td class="task__date"><?= $val['execution'] ?></td>
+                                <td class="task__date"><?=htmlspecialchars($val['execution']) ?></td>
                                 <td class="task__controls"></td>
                             </tr>
                             
