@@ -102,16 +102,12 @@ function get_projects_count($some_project, array $some_tasks_list) {
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
 
-                    <?php foreach ($projects as $key => $val): ?>
-                     
+                    <?php foreach ($projects as $key => $val): ?>   
                             <li class="main-navigation__list-item <?php if ($key ==0):?>main-navigation__list-item--active <?php endif; ?>">
                                 <a class="main-navigation__list-item-link" href="#"><?=$val;?></a>
                                 <span class="main-navigation__list-item-count"><?php echo get_projects_count($val, $tasks_list);?></span>
                             </li>
-
-      
                     <?php endforeach; ?>
-
                     </ul>
                 </nav>
 
@@ -153,14 +149,10 @@ function get_projects_count($some_project, array $some_tasks_list) {
                                         <input class="checkbox__input visually-hidden" type="checkbox" <?php if ($val['done'] == true): ?>checked<?php endif; ?>>
                                         <span class="checkbox__text"><?= $val['title'] ?></span>
                                     </label>
-                                </td>
-                            
-                                            
+                                </td> 
                                 <td class="task__date"><?= $val['execution'] ?></td>
                                 <td class="task__controls"></td>
-                            </tr>
-                            
-       
+                            </tr>   
                     <?php endforeach; ?>
 
                 </table>
