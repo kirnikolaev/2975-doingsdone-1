@@ -4,7 +4,6 @@ $show_complete_tasks = rand(0, 1);
 $projects = [
     "Все", "Входящие", "Учеба", "Работа","Домашние дела", "Авто"
 ];
-
 $tasks_list = [
     [
     'title' => 'Собеседование в IT компании',
@@ -43,9 +42,7 @@ $tasks_list = [
     'done' => false
     ]
 ];
-
 function get_projects_count($some_project, array $some_tasks_list) {
-
     if ($some_project == 'Все'){
         return count($some_tasks_list);
     }
@@ -55,12 +52,9 @@ function get_projects_count($some_project, array $some_tasks_list) {
         if ($some_project == $task['project']) {
             $projects_count++;
         }
-
     }
-
     return $projects_count;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="ru">
