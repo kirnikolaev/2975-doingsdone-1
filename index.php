@@ -102,7 +102,7 @@ function get_projects_count($some_project, array $some_tasks_list) {
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
 
-                    <?php foreach ($projects as $key => $val):    
+                    <?php foreach ($projects as $key => $val): ?>   
                             <li class="main-navigation__list-item <?php if ($key ==0):?>main-navigation__list-item--active <?php endif; ?>">
                                 <a class="main-navigation__list-item-link" href="#"><?=$val;?></a>
                                 <span class="main-navigation__list-item-count"><?php echo get_projects_count($val, $tasks_list);?></span>
