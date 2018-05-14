@@ -4,48 +4,45 @@ $show_complete_tasks = rand(0, 1);
 $projects = [
     "Все", "Входящие", "Учеба", "Работа","Домашние дела", "Авто"
 ];
-
 $tasks_list = [
     [
     'title' => 'Собеседование в IT компании',
     'execution' => '01.06.2018',
     'project' => 'Работа',
-    'done' => 'нет'
+    'done' => false
     ],
     [
     'title' => 'Выполнить тестовое задание',
     'execution' => '25.05.2018',
     'project' => 'Работа',
-    'done' => 'нет'
+    'done' => false
     ],
     [
     'title' => 'Сделать задание первого раздела',
     'execution' => '21.04.2018',
     'project' => 'Учеба',
-    'done' => 'да'
+    'done' => false
     ],
     [
     'title' => 'Встреча с другом',
     'execution' => '22.04.2018',
     'project' => 'Входящие',
-    'done' => 'нет'
+    'done' => true
     ],
     [
     'title' => 'Купить корм для кота',
     'execution' => 'нет',
     'project' => 'Домашние дела',
-    'done' => 'нет'
+    'done' => false
     ],
     [
     'title' => 'Заказать пиццу',
     'execution' => 'нет',
     'project' => 'Домашние дела',
-    'done' => 'нет'
+    'done' => false
     ]
 ];
-
 function get_projects_count($some_project, array $some_tasks_list) {
-
     if ($some_project == 'Все'){
         return count($some_tasks_list);
     }
@@ -55,12 +52,9 @@ function get_projects_count($some_project, array $some_tasks_list) {
         if ($some_project == $task['project']) {
             $projects_count++;
         }
-
     }
-
     return $projects_count;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -108,22 +102,12 @@ function get_projects_count($some_project, array $some_tasks_list) {
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
 
-                    <?php foreach ($projects as $key => $val): ?>
-                        <?php if ($key ==0): ?>
-                            <li class="main-navigation__list-item main-navigation__list-item--active">
+                    <?php foreach ($projects as $key => $val):    
+                            <li class="main-navigation__list-item <?php if ($key ==0):?>main-navigation__list-item--active <?php endif; ?>">
                                 <a class="main-navigation__list-item-link" href="#"><?=$val;?></a>
                                 <span class="main-navigation__list-item-count"><?php echo get_projects_count($val, $tasks_list);?></span>
                             </li>
-
-                        <?php else: ?>
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?=$val;?></a>
-                                <span class="main-navigation__list-item-count"><?php echo get_projects_count($val, $tasks_list);?></span>
-                            </li>
-
-                        <?php endif; ?>
                     <?php endforeach; ?>
-
                     </ul>
                 </nav>
 
@@ -158,29 +142,17 @@ function get_projects_count($some_project, array $some_tasks_list) {
 
                 <table class="tasks">
                     <?php foreach ($tasks_list as $key => $val): ?>
-                            <?php if ($val['done'] == 'да'): ?>
-                                <tr class="tasks__item task task--completed">
-                                <td class="task__select task--completed">
+                           
+                                <tr class="tasks__item task <?php if ($val['done'] == true): ?>task--completed<?php endif; ?>">
+                                <td class="task__select <?php if ($val['done'] == true): ?>task--completed <?php endif; ?>">
                                     <label class="checkbox task__checkbox">
-                                        <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                                        <input class="checkbox__input visually-hidden" type="checkbox" <?php if ($val['done'] == true): ?>checked<?php endif; ?>>
                                         <span class="checkbox__text"><?= $val['title'] ?></span>
                                     </label>
-                                </td>
-
-                            <?php else: ?>
-                                <tr class="tasks__item task">
-                                <td class="task__select">
-                                    <label class="checkbox task__checkbox">
-                                        <input class="checkbox__input visually-hidden" type="checkbox">
-                                        <span class="checkbox__text"><?= $val['title'] ?></span>
-                                    </label>
-                            <?php endif; ?>
-                                            
+                                </td> 
                                 <td class="task__date"><?= $val['execution'] ?></td>
                                 <td class="task__controls"></td>
-                            </tr>
-                            
-       
+                            </tr>   
                     <?php endforeach; ?>
 
                 </table>
