@@ -26,7 +26,7 @@
                 <table class="tasks">
                     <?php foreach ($tasks_list as $key => $val): ?>
                            
-                                <tr class="tasks__item task <?php if ($val['done'] == true): ?>task--completed<?php endif; ?><?php if (strtotime($val['execution'])-time() < 86000 & $val['execution']!="нет"): ?>task--important<?php endif; ?>">
+                                <tr class="tasks__item task <?php if ($val['done'] == true): ?>task--completed<?php endif; ?><?=is_important_task($val['execution'])?>">
                                 <td class="task__select <?php if ($val['done'] == true): ?>task--completed <?php endif; ?>">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden" type="checkbox" <?php if ($val['done'] == true): ?>checked<?php endif; ?>>
