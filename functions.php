@@ -26,7 +26,7 @@ function render($template_name, $vars = array()) {
 
 function is_important_task ($execution_date) {
     if (strtotime($execution_date) - time() < 86000 & $execution_date !="нет"){
-        print 'task--important';
+        return 'task--important';
     }
 }
 
