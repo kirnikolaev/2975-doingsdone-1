@@ -1,11 +1,10 @@
 <?php
 // показывать или нет выполненные задачи
+date_default_timezone_set('Europe/Moscow');
 $show_complete_tasks = rand(0, 1);
-
 $projects = [
     "Все", "Входящие", "Учеба", "Работа","Домашние дела", "Авто"
 ];
-
 $tasks_list = [
     [
     'title' => 'Собеседование в IT компании',
@@ -21,13 +20,13 @@ $tasks_list = [
     ],
     [
     'title' => 'Сделать задание первого раздела',
-    'execution' => '21.04.2018',
+    'execution' => '15.05.2018',
     'project' => 'Учеба',
     'done' => false
     ],
     [
     'title' => 'Встреча с другом',
-    'execution' => '22.04.2018',
+    'execution' => '15.04.2018',
     'project' => 'Входящие',
     'done' => true
     ],
@@ -44,8 +43,6 @@ $tasks_list = [
     'done' => false
     ]
 ];
-
-
 require ('functions.php');
 $print_main = render('index', ['show_complete_tasks'=>$show_complete_tasks, 'tasks_list'=>$tasks_list]);
 $print_layout = render('layout', [
@@ -55,6 +52,5 @@ $print_layout = render('layout', [
     'content'=>$print_main,
     'username'=>'Имя пользователя'
 ]);
-
 print $print_layout;
 ?>
