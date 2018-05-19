@@ -1,6 +1,6 @@
 CREATE DATABASE doings
-DEFAULT CHARACTER SET utf8
-DEFAULT COLLATE utf8_general_ci;
+	DEFAULT CHARACTER SET utf8
+	DEFAULT COLLATE utf8_general_ci;
 
 USE doings;
 
@@ -24,7 +24,7 @@ id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`name` CHAR(18),
 	`password` CHAR(18),
 	`email` CHAR(18),
-	`phone` TINYINT(13)
+	`phone` CHAR(12)
 );
 
 CREATE UNIQUE INDEX email ON users(email);
