@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><?=$title?></title>
+    <title><?=htmlspecialchars($title)?></title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flatpickr.min.css">
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="user-menu__data">
-                        <p><?=$username?></p>
+                        <p><?=htmlspecialchars($username)?></p>
 
                         <a href="#">Выйти</a>
                     </div>
@@ -43,12 +43,16 @@
             
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
+                        <li class="main-navigation__list-item main-navigation__list-item--active">
+                                <a class="main-navigation__list-item-link" href="#">Все</a>
+                                <span class="main-navigation__list-item-count"><?=count($tasks_list);?></span>
+                            </li>
 
-                    <?php foreach ($projects as $key => $val): ?>
+                    <?php foreach ($projects as $key): ?>
                      
-                            <li class="main-navigation__list-item <?php if ($key ==0):?>main-navigation__list-item--active <?php endif; ?>">
-                                <a class="main-navigation__list-item-link" href="#"><?=$val;?></a>
-                                <span class="main-navigation__list-item-count"><?php echo get_projects_count($val, $tasks_list);?></span>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="#"><?=$key['project_name'];?></a>
+                                <span class="main-navigation__list-item-count"><?=$key['COUNT(project_name)'];?></span>
                             </li>
 
       

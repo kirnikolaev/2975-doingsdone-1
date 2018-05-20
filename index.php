@@ -1,49 +1,16 @@
 <?php
 // показывать или нет выполненные задачи
+date_default_timezone_set('Europe/Moscow');
 $show_complete_tasks = rand(0, 1);
+$con = mysqli_connect("localhost", "root", "weider32", "doings");
 
-$projects = [
-    "Все", "Входящие", "Учеба", "Работа","Домашние дела", "Авто"
-];
+$sql2 = "SELECT project_name, COUNT(project_name) FROM tasks JOIN projects ON tasks.project_id = projects.project_id WHERE user_id ='1' GROUP BY project_name";
+$result2 = mysqli_query($con, $sql2);
+$projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 
-$tasks_list = [
-    [
-    'title' => 'Собеседование в IT компании',
-    'execution' => '01.06.2018',
-    'project' => 'Работа',
-    'done' => false
-    ],
-    [
-    'title' => 'Выполнить тестовое задание',
-    'execution' => '25.05.2018',
-    'project' => 'Работа',
-    'done' => false
-    ],
-    [
-    'title' => 'Сделать задание первого раздела',
-    'execution' => '21.04.2018',
-    'project' => 'Учеба',
-    'done' => false
-    ],
-    [
-    'title' => 'Встреча с другом',
-    'execution' => '22.04.2018',
-    'project' => 'Входящие',
-    'done' => true
-    ],
-    [
-    'title' => 'Купить корм для кота',
-    'execution' => 'нет',
-    'project' => 'Домашние дела',
-    'done' => false
-    ],
-    [
-    'title' => 'Заказать пиццу',
-    'execution' => 'нет',
-    'project' => 'Домашние дела',
-    'done' => false
-    ]
-];
+$sql = "SELECT * FROM tasks WHERE user_id=1";
+$result = mysqli_query($con, $sql);
+$tasks_list = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
 require ('functions.php');
@@ -51,7 +18,7 @@ $print_main = render('index', ['show_complete_tasks'=>$show_complete_tasks, 'tas
 $print_layout = render('layout', [
     'projects' => $projects,
     'tasks_list'=>$tasks_list,
-    'title'=>'Дела в порядке',
+    'title'=>'Локальные дела в порядке',
     'content'=>$print_main,
     'username'=>'Имя пользователя'
 ]);
