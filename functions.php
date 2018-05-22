@@ -6,7 +6,7 @@
     
     $projects_count = 0;
     foreach ($some_tasks_list as $task) {
-        if ($some_project == $task['project_id']) {
+        if ($some_project == $task['id']) {
             $projects_count++;
         }
 
@@ -25,7 +25,7 @@ function render($template_name, $vars = array()) {
 }
 
 function is_important_task ($execution_date) {
-    if (strtotime($execution_date) - time() < 86000 & $execution_date !=""){
+    if ($execution_date - time() < 86000 && !is_null($execution_date)){
         return 'task--important';
     }
 }
