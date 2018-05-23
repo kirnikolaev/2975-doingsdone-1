@@ -16,7 +16,7 @@ $print_main = render('index', ['show_complete_tasks'=>$show_complete_tasks, 'tas
 $print_layout = render('layout', [
     'projects' => $projects,
     'tasks_list'=>$tasks_list,
-    'title'=>'Локальные дела в порядке',
+    'title'=>'Дела в порядке',
     'content'=>$print_main,
     'username'=>'Имя пользователя'
 ]);
