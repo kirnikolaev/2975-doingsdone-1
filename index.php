@@ -1,5 +1,5 @@
 <?php
-// показывать или нет выполненные задачи
+require ('functions.php');
 date_default_timezone_set('Europe/Moscow');
 $show_complete_tasks = rand(0, 1);
 $con = mysqli_connect("localhost", "root", "weider32", "doings");
@@ -12,7 +12,6 @@ $sql = "SELECT *, Unix_timestamp(execution) AS execution_unix FROM tasks WHERE u
 $result = mysqli_query($con, $sql);
 $tasks_list = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-require ('functions.php');
 $print_main = render('index', ['show_complete_tasks'=>$show_complete_tasks, 'tasks_list'=>$tasks_list]);
 $print_layout = render('layout', [
     'projects' => $projects,
@@ -21,5 +20,7 @@ $print_layout = render('layout', [
     'content'=>$print_main,
     'username'=>'Имя пользователя'
 ]);
+
 print $print_layout;
 ?>
+
