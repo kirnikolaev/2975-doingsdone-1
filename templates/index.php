@@ -27,7 +27,6 @@
                     <?php foreach ($tasks_list as $key => $val): ?>
                            
                                 <tr class="tasks__item task <?php if ($val['done'] == true): ?>task--completed<?php endif; ?><?php print is_important_task($val['execution_unix']);?>">
-
                                 <td class="task__select <?php if ($val['done'] == true): ?>task--completed <?php endif; ?>">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden" type="checkbox" <?php if ($val['done'] == true): ?>checked<?php endif; ?>>
@@ -35,12 +34,10 @@
                                     </label>
                                 </td>
                             
-                                <td class="task__date">
-                                    <?php if (!is_null($val['execution_unix'])){
-                                        print htmlspecialchars(date('d.m.Y',$val['execution_unix']));
-                                    }?>
-                                </td>
-
+                                            
+                                <td class="task__date"><?php if (!is_null($val['execution_unix'])){
+                                    print htmlspecialchars(date('d.m.Y',$val['execution_unix']));
+                                }?></td>
                                 <td class="task__controls"></td>
                             </tr>
                             

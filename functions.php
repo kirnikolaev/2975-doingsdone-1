@@ -30,4 +30,42 @@ function is_important_task ($execution_date) {
     }
 }
 
+function connect_db (){
+    return mysqli_connect("localhost", "root", "weider32", "doings");
+}
+
+function get_project_list ($con, $show_complete) {
+
+    if ($show_complete == 0){
+        $sql2 = "SELECT project_name, COUNT(project_name) FROM tasks JOIN projects ON tasks.project_id = projects.id WHERE user_id ='1' AND done IS NULL GROUP BY project_name";
+        $result2 = mysqli_query($con, $sql2);
+        $projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+    }
+
+    else {
+        $sql2 = "SELECT project_name, COUNT(project_name) FROM tasks JOIN projects ON tasks.project_id = projects.id WHERE user_id ='1' GROUP BY project_name";
+        $result2 = mysqli_query($con, $sql2);
+        $projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);    
+    }
+
+    return $projects;
+}
+
+function get_tasks_list ($con, $show_complete) {
+
+    if ($show_complete == 0){
+        $sql2 = "SELECT *, Unix_timestamp(execution) AS execution_unix FROM tasks WHERE done IS NULL AND user_id=1";
+        $result2 = mysqli_query($con, $sql2);
+        $tasks_list = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+    }
+
+    else {
+        $sql2 = "SELECT *, Unix_timestamp(execution) AS execution_unix FROM tasks WHERE user_id=1";
+        $result2 = mysqli_query($con, $sql2);
+        $tasks_list = mysqli_fetch_all($result2, MYSQLI_ASSOC);    
+    }
+
+    return $tasks_list;
+}
+
 ?>
