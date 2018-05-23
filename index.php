@@ -8,7 +8,7 @@ $sql2 = "SELECT project_name, COUNT(project_name) FROM tasks JOIN projects ON ta
 $result2 = mysqli_query($con, $sql2);
 $projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 
-$sql = "SELECT *, Unix_timestamp(execution) AS execution_unix FROM tasks WHERE user_id=1;";
+$sql = "SELECT *, Unix_timestamp(execution) AS execution_unix FROM tasks WHERE done IS NULL AND user_id=1";
 $result = mysqli_query($con, $sql);
 $tasks_list = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
