@@ -40,15 +40,14 @@ function get_project_list ($con, $show_complete) {
 
     if ($show_complete == 0){
         $sql2 = "$query AND done IS NULL GROUP BY project_name";
-        $result2 = mysqli_query($con, $sql2);
-        $projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     }
 
     else {
         $sql2 = "$query GROUP BY project_name";
-        $result2 = mysqli_query($con, $sql2);
-        $projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);    
     }
+
+    $result2 = mysqli_query($con, $sql2);
+    $projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 
     return $projects;
 }
@@ -59,16 +58,15 @@ function get_tasks_list ($con, $show_complete) {
 
     if ($show_complete == 0){
         $sql2 = "$query AND done IS NULL";
-        $result2 = mysqli_query($con, $sql2);
-        $tasks_list = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     }
 
     else {
         $sql2 = "$query";
-        $result2 = mysqli_query($con, $sql2);
-        $tasks_list = mysqli_fetch_all($result2, MYSQLI_ASSOC);    
     }
 
+    $result2 = mysqli_query($con, $sql2);
+    $tasks_list = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+    
     return $tasks_list;
 }
 
