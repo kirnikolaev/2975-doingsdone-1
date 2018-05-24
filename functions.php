@@ -36,14 +36,16 @@ function connect_db (){
 
 function get_project_list ($con, $show_complete) {
 
+    $query = 'SELECT project_name, COUNT(project_name) FROM tasks JOIN projects ON tasks.project_id = projects.id WHERE user_id =1';
+
     if ($show_complete == 0){
-        $sql2 = "SELECT project_name, COUNT(project_name) FROM tasks JOIN projects ON tasks.project_id = projects.id WHERE user_id ='1' AND done IS NULL GROUP BY project_name";
+        $sql2 = "$query AND done IS NULL GROUP BY project_name";
         $result2 = mysqli_query($con, $sql2);
         $projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     }
 
     else {
-        $sql2 = "SELECT project_name, COUNT(project_name) FROM tasks JOIN projects ON tasks.project_id = projects.id WHERE user_id ='1' GROUP BY project_name";
+        $sql2 = "$query GROUP BY project_name";
         $result2 = mysqli_query($con, $sql2);
         $projects = mysqli_fetch_all($result2, MYSQLI_ASSOC);    
     }
@@ -53,14 +55,16 @@ function get_project_list ($con, $show_complete) {
 
 function get_tasks_list ($con, $show_complete) {
 
+    $query = 'SELECT *, Unix_timestamp(execution) AS execution_unix FROM tasks WHERE user_id=1';
+
     if ($show_complete == 0){
-        $sql2 = "SELECT *, Unix_timestamp(execution) AS execution_unix FROM tasks WHERE done IS NULL AND user_id=1";
+        $sql2 = "$query AND done IS NULL";
         $result2 = mysqli_query($con, $sql2);
         $tasks_list = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     }
 
     else {
-        $sql2 = "SELECT *, Unix_timestamp(execution) AS execution_unix FROM tasks WHERE user_id=1";
+        $sql2 = "$query";
         $result2 = mysqli_query($con, $sql2);
         $tasks_list = mysqli_fetch_all($result2, MYSQLI_ASSOC);    
     }
