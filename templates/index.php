@@ -1,6 +1,25 @@
+<?php
+$tabs = [
+    [
+    'title'=> 'Все задачи',
+    'link'=> 'all'    
+    ],
+    [
+    'title'=> 'Повестка дня',
+    'link'=> 'today'    
+    ],
+    [
+    'title'=> 'Завтра',
+    'link'=> 'tomorrow'    
+    ],
+    [
+    'title'=> 'Просроченные',
+    'link'=> 'deadline'    
+    ]
+];
+?>
 
-        <main class="content__main">
-
+          <main class="content__main">
                 <h2 class="content__main-heading">Список задач</h2>
 
                 <form class="search-form" action="index.html" method="post">
@@ -8,13 +27,14 @@
 
                     <input class="search-form__submit" type="submit" name="" value="Искать">
                 </form>
-
+ 
                 <div class="tasks-controls">
                     <nav class="tasks-switch">
-                        <a href="/" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-                        <a href="/" class="tasks-switch__item">Повестка дня</a>
-                        <a href="/" class="tasks-switch__item">Завтра</a>
-                        <a href="/" class="tasks-switch__item">Просроченные</a>
+                        
+                        <?php foreach ($tabs as $key => $value): ?>
+                            <a href="?tab=<?=$value['link']?>" class="tasks-switch__item <?php if ($_GET['tab'] == $value['link']):?> tasks-switch__item--active <?php endif;?> ">   <?=$value['title']?></a>
+                        
+                    <?php endforeach; ?>
                     </nav>
 
                     <label class="checkbox">
@@ -28,7 +48,7 @@
                 <table class="tasks">
                     <?php foreach ($tasks_list as $key => $val): ?>
                            
-                                <tr class="tasks__item task <?php if ($val['done'] == true): ?>task--completed<?php endif; ?><?php print is_important_task($val['execution']);?>">
+                                <tr class="tasks__item task <?php if ($val['done'] == true): ?>task--completed<?php endif; ?><?php print is_important_task($val['execution_unix']);?>">
                                 <td class="task__select <?php if ($val['done'] == true): ?>task--completed <?php endif; ?>">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden" type="checkbox" <?php if ($val['done'] == true): ?>checked<?php endif; ?>>
@@ -36,7 +56,10 @@
                                     </label>
                                 </td>
                             
-                                <td class="task__date"><?=htmlspecialchars($val['execution'])?></td>
+                                            
+                                <td class="task__date"><?php if (!is_null($val['execution_unix'])){
+                                    print htmlspecialchars(date('d.m.Y',$val['execution_unix']));
+                                }?></td>
                                 <td class="task__controls"></td>
                             </tr>
                             
